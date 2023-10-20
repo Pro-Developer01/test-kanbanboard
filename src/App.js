@@ -45,6 +45,8 @@ function App() {
       labels: [],
       date: "",
       tasks: [],
+      tickets,
+      users,
     });
     setBoards(tempBoards);
   };
@@ -116,10 +118,38 @@ function App() {
     setBoards(tempBoards);
   };
 
+  const [tickets, setTickets] = useState([]);
+  const [users, setUsers] = useState([]);
+
   useEffect(() => {
+    const fetchData = async () => {
+      // Fetch tickets
+      const apiResponse = await fetch('https://api.quicksell.co/v1/internal/frontend-assignment');
+      const apiData = await apiResponse.json();
+      console.log(apiData)
+      
+      // setBoards(ticketsData.boards);
+      return apiData;
+    }
+    fetchData().then((result) => {
+      // Do something with the result
+      console.log('Data fetched:', result);
+      setTickets(result.tickets);
+      setUsers(result.users);
+      console.log(users);
+      // You can set a parameter or use the result in another function
+      //anotherFunction(result);
+    }).catch((error) => {
+      // Handle errors
+      console.error('Error:', error);
+    });;
     localStorage.setItem("prac-kanban", JSON.stringify(boards));
+    // console.log(boards);
+    
   }, [boards]);
 
+  // console.log(users);
+  // console.log(tickets);
   return (
     <div className="app">
       <div className="app_nav">
@@ -129,16 +159,19 @@ function App() {
         <div className="app_boards">
           {boards.map((item) => (
             <Board
-              key={item.id}
-              board={item}
-              addCard={addCardHandler}
-              removeBoard={() => removeBoard(item.id)}
-              removeCard={removeCard}
-              dragEnded={dragEnded}
-              dragEntered={dragEntered}
-              updateCard={updateCard}
+            key={item.id}
+            board={item}
+            addCard={(id, title) => addCardHandler(id, title, tickets, users)}
+            removeBoard={() => removeBoard(item.id)}
+            removeCard={removeCard}
+            dragEnded={dragEnded}
+            dragEntered={dragEntered}
+            updateCard={updateCard}
+            tickets={tickets}
+            users={users}
             />
           ))}
+          
           <div className="app_boards_last">
             <Editable
               displayClass="app_boards_add-board"

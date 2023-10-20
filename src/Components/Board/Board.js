@@ -8,7 +8,10 @@ import Editable from "../Editabled/Editable";
 import "./Board.css";
 
 function Board(props) {
+  const {key, board,tickets,users} = props;
   const [showDropdown, setShowDropdown] = useState(false);
+  const [user, setUser] = useState(users);
+  console.log(props.users);
 
   return (
     <div className="board">
@@ -17,6 +20,7 @@ function Board(props) {
           {props.board?.title}
           <span>{props.board?.cards?.length || 0}</span>
         </p>
+        
         <div
           className="board_header_title_more"
           onClick={() => setShowDropdown(true)}
@@ -42,6 +46,7 @@ function Board(props) {
             dragEntered={props.dragEntered}
             dragEnded={props.dragEnded}
             updateCard={props.updateCard}
+            users = {user}
           />
         ))}
         <Editable

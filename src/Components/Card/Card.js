@@ -10,7 +10,8 @@ function Card(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const { id, title, date, tasks, labels } = props.card;
+  const { id, title, date, tasks, labels, users } = props.card;
+  console.log(users);
 
   const formatDate = (value) => {
     if (!value) return "";
@@ -56,9 +57,9 @@ function Card(props) {
       >
         <div className="card_top">
           <div className="card_top_labels">
-            {labels?.map((item, index) => (
-              <label key={index} style={{ backgroundColor: item.color }}>
-                {item.text}
+            {users?.map((user, index) => (
+              <label key={index} style={{ backgroundColor: "white" }}>
+                {user.name}
               </label>
             ))}
           </div>

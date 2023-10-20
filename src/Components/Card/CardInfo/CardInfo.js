@@ -29,7 +29,7 @@ function CardInfo(props) {
   const [values, setValues] = useState({
     ...props.card,
   });
-
+  
   const updateTitle = (value) => {
     setValues({ ...values, title: value });
   };
@@ -119,7 +119,20 @@ function CardInfo(props) {
         <div className="cardinfo_box">
           <div className="cardinfo_box_title">
             <Type />
-            <p>Title</p>
+            <p>ticket id</p>
+          </div>
+          <Editable
+            defaultValue="CaN-1"
+            text="CAn-2"
+            placeholder="Enter Title"
+            onSubmit={updateTitle}
+          />
+        </div>
+
+        <div className="cardinfo_box">
+          <div className="cardinfo_box_title">
+            <Type />
+            <p>title</p>
           </div>
           <Editable
             defaultValue={values.title}
@@ -128,24 +141,12 @@ function CardInfo(props) {
             onSubmit={updateTitle}
           />
         </div>
-
-        <div className="cardinfo_box">
-          <div className="cardinfo_box_title">
-            <List />
-            <p>Description</p>
-          </div>
-          <Editable
-            defaultValue={values.desc}
-            text={values.desc || "Add a Description"}
-            placeholder="Enter description"
-            onSubmit={updateDesc}
-          />
-        </div>
+        
 
         <div className="cardinfo_box">
           <div className="cardinfo_box_title">
             <Calendar />
-            <p>Date</p>
+            <p>user id</p>
           </div>
           <input
             type="date"
@@ -158,7 +159,7 @@ function CardInfo(props) {
         <div className="cardinfo_box">
           <div className="cardinfo_box_title">
             <Tag />
-            <p>Labels</p>
+            <p>tag</p>
           </div>
           <div className="cardinfo_box_labels">
             {values.labels?.map((item, index) => (
@@ -193,7 +194,7 @@ function CardInfo(props) {
         <div className="cardinfo_box">
           <div className="cardinfo_box_title">
             <CheckSquare />
-            <p>Tasks</p>
+            <p>status</p>
           </div>
           <div className="cardinfo_box_progress-bar">
             <div
