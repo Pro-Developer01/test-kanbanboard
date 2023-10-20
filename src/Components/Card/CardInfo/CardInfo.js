@@ -34,6 +34,10 @@ function CardInfo(props) {
     setValues({ ...values, title: value });
   };
 
+  const updateTicketID = (value) => {
+    setValues({ ...values, ticket: value });
+  };
+
   const updateDesc = (value) => {
     setValues({ ...values, desc: value });
   };
@@ -125,7 +129,7 @@ function CardInfo(props) {
             defaultValue="CaN-1"
             text="CAn-2"
             placeholder="Enter Title"
-            onSubmit={updateTitle}
+            onSubmit={updateTicketID}
           />
         </div>
 

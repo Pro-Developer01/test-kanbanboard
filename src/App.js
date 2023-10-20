@@ -4,6 +4,7 @@ import Board from "./Components/Board/Board";
 
 import "./App.css";
 import Editable from "./Components/Editabled/Editable";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
   const [boards, setBoards] = useState(
@@ -14,6 +15,8 @@ function App() {
     bid: "",
     cid: "",
   });
+  const [view, setView] = useState('users');
+
 
   const addboardHandler = (name) => {
     const tempBoards = [...boards];
@@ -156,7 +159,7 @@ function App() {
         <h1>Kanban Board</h1>
       </div>
       <div className="app_boards_container">
-        <div className="app_boards">
+        {/* <div className="app_boards">
           {boards.map((item) => (
             <Board
             key={item.id}
@@ -182,6 +185,15 @@ function App() {
               onSubmit={addboardHandler}
             />
           </div>
+        </div> */}
+        <div>
+                <select name="viewSelect" id="viewSelect" onChange={(e) => { setView(e.target.value) }}>
+                    <option value="users">Users</option>
+                    <option value="status">status</option>
+                </select>
+            </div>
+        <div className="app_boards">
+          <Dashboard tickets={tickets} users={users} view={view}/>
         </div>
       </div>
     </div>
